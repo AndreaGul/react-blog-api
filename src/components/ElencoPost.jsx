@@ -25,7 +25,7 @@ export default function ElencoPost({ response }) {
           <img src={post.img} alt={post.title} />
           <p>{post.content}</p>
           <p>Published: {post.published ? 'Yes' : 'No'}</p>
-          <p>Tags: {post.tags.map(tag => tag.title).join(', ')}</p>
+          <p>Tags: {post.tags.map(tag => tag.name).join(', ')}</p>
         </div>
       ))}
     </div>
