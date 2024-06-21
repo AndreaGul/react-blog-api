@@ -18,7 +18,7 @@ export default function Form({ tags, categories, onCreate }) {
         e.preventDefault();
 
         try {
-            console.log(formData)
+            console.log('formdata',formData)
             const res = await axios.post(`${apiUrl}/posts`, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data"
@@ -39,16 +39,7 @@ export default function Form({ tags, categories, onCreate }) {
         }));
     };
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                handleFormField('img', reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+  
 
     const renderField = (objKey, value) => {
         if (typeof value === 'boolean') {
@@ -118,18 +109,8 @@ export default function Form({ tags, categories, onCreate }) {
                 <div key={`formElement${objKey}`} className="input-css container-input-img">
                     <label>
                         {objKey}
-                        <input className="input-img" type="file" onChange={handleFileChange} />
+                        <input className="input-img" type="file" onChange={(e)=> handleFormField(objKey,e.target.files[0])} />
                     </label>
-                    {formData.img && (
-                        <div>
-                            <img
-                                style={{ width: '300px' }}
-                                src={formData.img}
-                                alt="Preview"
-                                className="preview-img"
-                            />
-                        </div>
-                    )}
                 </div>
             );
         } else {
